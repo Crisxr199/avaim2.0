@@ -1,0 +1,87 @@
+
+/* Header */
+body, html {
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.header h1 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+.header nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    display: flex; /* Flexbox para alinear en fila */
+    justify-content: center; /* Centra los elementos horizontalmente */
+}
+
+.header nav ul li {
+    margin: 0 15px; /* Espaciado entre elementos */
+}
+
+.header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.caja1 {
+    width: 100%;
+    height: max-content;
+    border: none;
+    margin: auto;
+    margin-top: 50px;
+    text-align: justify;
+}
+
+.h1 {
+    margin-left: 20px;
+    border-left: #303030 5px solid;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.parrafo {
+    padding: 20px;
+    font-family: "Roboto", serif;;
+    color: white;
+    font-weight: 200;
+}
+
+@media (max-width: 400px){
+    .caja1 {
+        width: 380px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header nav ul {
+        flex-direction: row; /* Siempre en fila, incluso en móviles */
+    }
+
+    .header nav ul li {
+        margin: 0 10px; /* Reducir el espaciado en móviles */
+    }
+}
+
+.fondo {
+    background-color: #212020;
+}
+
+.img1 {
+    width: 100%;
+    scroll-behavior:smooth;
+    opacity: 70%;
+}
