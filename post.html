@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Publicación</title>
+    <link rel="stylesheet" href="/css/feed.css"> <!-- Asegúrate de que la ruta del CSS sea correcta -->
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Nueva Publicación</h1>
+        <div class="form">
+            <!-- Formulario para crear posts -->
+            <form id="postForm" enctype="multipart/form-data">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" placeholder="Título de la publicación" required>
+
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Descripción" required></textarea>
+
+                <label for="imagen">Imagen:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+
+                <button type="submit">Publicar</button>
+            </form>
+        </div>
+
+        <!-- Contenedor para mostrar las publicaciones -->
+        <div id="postsContainer">
+            <!-- Aquí se mostrarán las publicaciones -->
+        </div>
+    </div>
+
+    <!-- Vincula el archivo JavaScript -->
+    <script src="/javascript/main.js"></script>
+</body>
+</html>

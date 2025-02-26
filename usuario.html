@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vista de Usuario</title>
+  <link rel="stylesheet" href="/css/feed.css"> <!-- Asegúrate de que la ruta del CSS sea correcta -->
+</head>
+<body>
+  <h1>Posts</h1>
+  <div id="posts"></div>
+
+  <script>
+    // Función para cargar y mostrar los posts
+    async function loadPosts() {
+      try {
+        const response = await fetch('/posts');
+        if (!response.ok) {
+          throw new Error('Error al cargar los posts');
+        }
+        const posts = await response.json();
+
+        const postsContainer = document.getElementById('posts');
+        postsContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevos posts
+
+        posts.forEach(post => {
+          const postElement = document.createElement('div');
+          postElement.classList.add('post'); // Añadir clase para estilos CSS
+          postElement.innerHTML = `
+            <h2>${post.titulo}</h2>
+            <p>${post.descripcion}</p>
+            ${post.imagen ? `<img src="${post.imagen}" alt="${post.titulo}" style="max-width: 100%;">` : ''}
+            <h3>Comentarios</h3>
+            <ul>
+              ${post.comentarios.map(comentario => `
+                <li><strong>${comentario.autor}</strong>: ${comentario.contenido}</li>
+              `).join('')}
+            </ul>
+            <form onsubmit="agregarComentario(event, '${post.id}')">
+              <input type="text" name="autor" placeholder="Tu nombre" required>
+              <textarea name="contenido" placeholder="Tu comentario" required></textarea>
+              <button type="submit">Comentar</button>
+            </form>
+          `;
+          postsContainer.appendChild(postElement);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al cargar los posts. Por favor, recarga la página.');
+      }
+    }
+
+    // Función para agregar un comentario
+    async function agregarComentario(event, postId) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const comentario = {
+        autor: formData.get('autor'),
+        contenido: formData.get('contenido')
+      };
+
+      try {
+        const response = await fetch(`/posts/${postId}/comentarios`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(comentario)
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al agregar el comentario');
+        }
+
+        // Recargar la página para mostrar el nuevo comentario
+        location.reload();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al agregar el comentario. Por favor, inténtalo de nuevo.');
+      }
+    }
+
+    // Cargar los posts al iniciar la página
+    loadPosts();
+  </script>
+</body>
+</html>

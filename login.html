@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Iniciar Sesión</h1>
+  <form onsubmit="iniciarSesion(event)">
+    <input type="text" name="usuario" placeholder="Usuario" required>
+    <input type="password" name="contrasena" placeholder="Contraseña" required>
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <script>
+    function iniciarSesion(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const credenciales = {
+        usuario: formData.get('usuario'),
+        contrasena: formData.get('contrasena')
+      };
+
+      // Aquí puedes hacer una solicitud al servidor para validar las credenciales
+      // y redirigir al panel de administración si son correctas.
+      if (credenciales.usuario === 'admin' && credenciales.contrasena === '1234') {
+        window.location.href = '/post.html';
+      } else {
+        alert('Credenciales incorrectas');
+      }
+    }
+  </script>
+</body>
+</html>
